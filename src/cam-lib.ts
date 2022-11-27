@@ -22,7 +22,9 @@ const getAllVideoDevice = navigator.mediaDevices
     }
     return s
   })
-  .catch((e) => {})
+  .catch((e) => {
+    throw new Error(e)
+  })
 
 const htmlIDs = {
   root: 'cam-lib-r',
@@ -67,16 +69,21 @@ export default class CamLib {
     this.mode = 'PICTURE'
     this._navigatorPermisionStatusVideo = 'NO'
     this._navigatorPermisionStatusAudio = 'NO'
+    this._getMediaDevices()
+  }
 
+  private _getMediaDevices() {
     navigator.mediaDevices
       .getUserMedia({
         video: true,
       })
       .then((s) => {
         this._navigatorPermisionStatusVideo = 'OK'
+        this._videoElement.srcObject = s
       })
       .catch((err) => {
         this._navigatorPermisionStatusVideo = 'DENIED'
+        throw new Error(err)
       })
     navigator.mediaDevices
       .getUserMedia({
@@ -87,7 +94,30 @@ export default class CamLib {
       })
       .catch((err) => {
         this._navigatorPermisionStatusAudio = 'DENIED'
+        throw new Error(err)
       })
+  }
+  private _removeMediaDevices() {
+    this._navigatorPermisionStatusAudio = 'NO'
+    this._navigatorPermisionStatusVideo = 'NO'
+    this._videoElement.srcObject = null
+  }
+
+  private _takePicture() {
+    if (
+      this._navigatorPermisionStatusVideo === 'NO' ||
+      this._navigatorPermisionStatusVideo === 'DENIED'
+    ) {
+      throw new Error(`Permision Failed`)
+    }
+  }
+  private _takeVideo() {
+    if (!this._navigatorPermisionStatusVideo) {
+      throw new Error(`Permision Failed`)
+    }
+    if (!this._navigatorPermisionStatusAudio) {
+      throw new Error(`Permision Failed`)
+    }
   }
 
   public get mode() {
@@ -106,10 +136,7 @@ export default class CamLib {
     this._dimension = c
   }
 
-  private _takePicture = () => {}
-  private _takeVideo = () => {}
-
-  public onButtonClicked = () => {
+  public onButtonClicked() {
     switch (this.mode) {
       case 'PICTURE':
         this._takePicture()
