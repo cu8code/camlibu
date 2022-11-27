@@ -34,11 +34,13 @@ export default class CamLib {
   private _videoElement: HTMLVideoElement
 
   constructor(props: CamLibProps = {}) {
-    this._rootElement = (function () {
-      const root = document.createElement('div') as HTMLElement
-      document.body.append(root)
-      return root
-    })()
+    this._rootElement =
+      props.rootElement ||
+      (function () {
+        const root = document.createElement('div') as HTMLElement
+        document.body.append(root)
+        return root
+      })()
     this._rootElement.innerHTML = initHTMLString
     this._videoElement = document.getElementById(htmlIDs.video) as HTMLVideoElement
     this._buttonElement = document.getElementById(htmlIDs.button) as HTMLButtonElement
@@ -120,7 +122,13 @@ export default class CamLib {
         break
     }
   }
-  public configureStylePreferences() {}
-  public addEventListeners() {}
-  public reset() {}
+  public configureStylePreferences() {
+    throw notImp
+  }
+  public addEventListeners() {
+    throw notImp
+  }
+  public reset() {
+    throw notImp
+  }
 }
