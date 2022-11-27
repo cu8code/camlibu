@@ -1,5 +1,3 @@
-import { throws } from 'assert'
-
 interface Dimension {
   width: number
   height: number
