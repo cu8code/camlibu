@@ -16,7 +16,7 @@ const htmlIDs = {
   button: 'cam-lib-b',
 }
 
-const notImp = new Error("TODO: not imp")
+const notImp = new Error('TODO: not imp')
 
 const initHTMLString = `
     <video id=${htmlIDs.video}></video>
@@ -49,7 +49,7 @@ export default class CamLib {
     }
     this.dimension = props.dimension || { width: 100, height: 100 }
     this.mode = 'PICTURE'
-    this._getMediaDevices()
+    // this._getMediaDevices()
   }
   private async _permisionStatus(): Promise<boolean> {
     const res = await navigator.permissions.query({ name: 'camera' })
@@ -59,7 +59,7 @@ export default class CamLib {
       return false
     }
   }
-  private _getMediaDevices() : void {
+  private _getMediaDevices() {
     navigator.mediaDevices
       .getUserMedia({
         video: true,
@@ -77,29 +77,30 @@ export default class CamLib {
       .then((s) => {
         throw notImp
       })
-      .catch((err) => {
-        throw new Error(err)
-      })
   }
-  private _removeMediaDevices() : void {
+  private _removeMediaDevices(): void {
     this._videoElement.srcObject = null
   }
 
-  private _takePicture() : void {
+  private _takePicture(): void {
     throw notImp
   }
-  private _takeVideo() : void {
+  private _takeVideo(): void {
     throw notImp
   }
 
-  public get mode() : Mode {
+  public get camera(){
+    return this._rootElement
+  }
+
+  public get mode(): Mode {
     return this._mode
   }
   public set mode(e: Mode) {
     this._mode = e
   }
 
-  public get dimension() : Dimension{
+  public get dimension(): Dimension {
     return this._dimension
   }
   public set dimension(c: Dimension) {
@@ -118,4 +119,7 @@ export default class CamLib {
         break
     }
   }
+  public configureStylePreferences() {}
+  public addEventListeners() {}
+  public reset() {}
 }
