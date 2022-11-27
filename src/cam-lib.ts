@@ -9,28 +9,14 @@ interface CamLibProps {
 }
 
 type Mode = 'PICTURE' | 'VIDEO'
-type NavigatorPermisionStatus = 'OK' | 'NO'
-
-const getAllVideoDevice = navigator.mediaDevices
-  .enumerateDevices()
-  .then((d) => {
-    const s = []
-    for (const i of d) {
-      if (i.kind === 'videoinput') {
-        s.push(i)
-      }
-    }
-    return s
-  })
-  .catch((e) => {
-    throw new Error(e)
-  })
 
 const htmlIDs = {
   root: 'cam-lib-r',
   video: 'cam-lib-v',
   button: 'cam-lib-b',
 }
+
+const notImp = new Error("TODO: not imp")
 
 const initHTMLString = `
     <video id=${htmlIDs.video}></video>
@@ -44,17 +30,13 @@ export default class CamLib {
   private _rootElement: HTMLElement
   private _buttonElement: HTMLButtonElement
   private _videoElement: HTMLVideoElement
-  private _navigatorPermisionStatusVideo: NavigatorPermisionStatus
-  private _navigatorPermisionStatusAudio: NavigatorPermisionStatus
 
   constructor(props: CamLibProps = {}) {
-    this._rootElement =
-      props.rootElement ||
-      (function () {
-        const root = document.createElement('div') as HTMLElement
-        document.body.append(root)
-        return root
-      })()
+    this._rootElement = (function () {
+      const root = document.createElement('div') as HTMLElement
+      document.body.append(root)
+      return root
+    })()
     this._rootElement.innerHTML = initHTMLString
     this._videoElement = document.getElementById(htmlIDs.video) as HTMLVideoElement
     this._buttonElement = document.getElementById(htmlIDs.button) as HTMLButtonElement
@@ -67,22 +49,25 @@ export default class CamLib {
     }
     this.dimension = props.dimension || { width: 100, height: 100 }
     this.mode = 'PICTURE'
-    this._navigatorPermisionStatusVideo = 'NO'
-    this._navigatorPermisionStatusAudio = 'NO'
     this._getMediaDevices()
   }
-
-  private _getMediaDevices() {
+  private async _permisionStatus(): Promise<boolean> {
+    const res = await navigator.permissions.query({ name: 'camera' })
+    if (res.state === 'granted') {
+      return true
+    } else {
+      return false
+    }
+  }
+  private _getMediaDevices() : void {
     navigator.mediaDevices
       .getUserMedia({
         video: true,
       })
       .then((s) => {
-        this._navigatorPermisionStatusVideo = 'OK'
         this._videoElement.srcObject = s
       })
       .catch((err) => {
-        this._navigatorPermisionStatusVideo = 'NO'
         throw new Error(err)
       })
     navigator.mediaDevices
@@ -90,41 +75,31 @@ export default class CamLib {
         audio: true,
       })
       .then((s) => {
-        this._navigatorPermisionStatusAudio = 'OK'
+        throw notImp
       })
       .catch((err) => {
-        this._navigatorPermisionStatusAudio = 'NO'
         throw new Error(err)
       })
   }
-  private _removeMediaDevices() {
-    this._navigatorPermisionStatusAudio = 'NO'
-    this._navigatorPermisionStatusVideo = 'NO'
+  private _removeMediaDevices() : void {
     this._videoElement.srcObject = null
   }
 
-  private _takePicture() {
-    if (this._navigatorPermisionStatusVideo === 'NO') {
-      throw new Error(`Permision Failed`)
-    }
+  private _takePicture() : void {
+    throw notImp
   }
-  private _takeVideo() {
-    if (!this._navigatorPermisionStatusVideo) {
-      throw new Error(`Permision Failed`)
-    }
-    if (!this._navigatorPermisionStatusAudio) {
-      throw new Error(`Permision Failed`)
-    }
+  private _takeVideo() : void {
+    throw notImp
   }
 
-  public get mode() {
+  public get mode() : Mode {
     return this._mode
   }
   public set mode(e: Mode) {
     this._mode = e
   }
 
-  public get dimension() {
+  public get dimension() : Dimension{
     return this._dimension
   }
   public set dimension(c: Dimension) {
