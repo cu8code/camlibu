@@ -11,9 +11,9 @@ interface CamLibProps {
 type Mode = 'PICTURE' | 'VIDEO'
 
 const htmlIDs = {
-  root: `cam-lib-r-${Math.random()}`,
-  video: `cam-lib-v-${Math.random()}`,
-  button: `cam-lib-b-${Math.random()}`,
+  root: `cam-lib-r-X0o${Math.random()}`,
+  video: `cam-lib-v-X0o${Math.random()}`,
+  button: `cam-lib-b-X0o${Math.random()}`,
 }
 console.log(htmlIDs)
 
