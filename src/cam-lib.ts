@@ -109,12 +109,14 @@ export default class CamLib {
   private _takePicture = () => {}
   private _takeVideo = () => {}
 
-  onButtonClicked = () => {
+  public onButtonClicked = () => {
     switch (this.mode) {
       case 'PICTURE':
         this._takePicture()
+        break
       case 'VIDEO':
         this._takeVideo()
+        break
     }
   }
 }
