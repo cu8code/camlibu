@@ -1,14 +1,8 @@
-import DummyClass from "../src/cam-lib"
+import CamLib from "../src/cam-lib"
 
-/**
- * Dummy test
- */
-describe("Dummy test", () => {
-  it("works if true is truthy", () => {
-    expect(true).toBeTruthy()
-  })
+const c = console.log
 
-  it("DummyClass is instantiable", () => {
-    expect(new DummyClass()).toBeInstanceOf(DummyClass)
-  })
+describe("Cam-lib", () => {
+  const testObj = new CamLib()
+  c(typeof testObj)
 })
