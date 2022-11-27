@@ -9,7 +9,7 @@ interface CamLibProps {
 }
 
 type Mode = 'PICTURE' | 'VIDEO'
-type NavigatorPermisionStatus = 'OK' | 'NO' | 'DENIED'
+type NavigatorPermisionStatus = 'OK' | 'NO'
 
 const getAllVideoDevice = navigator.mediaDevices
   .enumerateDevices()
@@ -82,7 +82,7 @@ export default class CamLib {
         this._videoElement.srcObject = s
       })
       .catch((err) => {
-        this._navigatorPermisionStatusVideo = 'DENIED'
+        this._navigatorPermisionStatusVideo = 'NO'
         throw new Error(err)
       })
     navigator.mediaDevices
@@ -93,7 +93,7 @@ export default class CamLib {
         this._navigatorPermisionStatusAudio = 'OK'
       })
       .catch((err) => {
-        this._navigatorPermisionStatusAudio = 'DENIED'
+        this._navigatorPermisionStatusAudio = 'NO'
         throw new Error(err)
       })
   }
@@ -104,10 +104,7 @@ export default class CamLib {
   }
 
   private _takePicture() {
-    if (
-      this._navigatorPermisionStatusVideo === 'NO' ||
-      this._navigatorPermisionStatusVideo === 'DENIED'
-    ) {
+    if (this._navigatorPermisionStatusVideo === 'NO') {
       throw new Error(`Permision Failed`)
     }
   }
