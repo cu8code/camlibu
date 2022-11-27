@@ -1,3 +1,5 @@
+import { throws } from 'assert'
+
 interface Dimension {
   width: number
   height: number
@@ -70,26 +72,25 @@ export default class CamLib {
       .catch((err) => {
         throw new Error(err)
       })
-    navigator.mediaDevices
-      .getUserMedia({
-        audio: true,
-      })
-      .then((s) => {
-        throw notImp
-      })
   }
   private _removeMediaDevices(): void {
     this._videoElement.srcObject = null
   }
 
-  private _takePicture(): void {
-    throw notImp
+  private _takePicture(): string {
+    if (!this._permisionStatus()) {
+      throw new Error('[ERROR] permissions was not provided')
+    }
+    const canvas = document.createElement('canvas')
+    const ctx = canvas.getContext('2d') as CanvasRenderingContext2D
+    ctx.drawImage(this._videoElement, 0, 0, this.dimension.width, this.dimension.height)
+    return canvas.toDataURL('image/jpeg')
   }
   private _takeVideo(): void {
     throw notImp
   }
 
-  public get camera(){
+  public get camera() {
     return this._rootElement
   }
 
