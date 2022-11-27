@@ -11,16 +11,17 @@ interface CamLibProps {
 type Mode = 'PICTURE' | 'VIDEO'
 
 const htmlIDs = {
-  root: 'cam-lib-r',
-  video: 'cam-lib-v',
-  button: 'cam-lib-b',
+  root: `cam-lib-r-${Math.random()}`,
+  video: `cam-lib-v-${Math.random()}`,
+  button: `cam-lib-b-${Math.random()}`,
 }
+console.log(htmlIDs)
 
 const notImp = new Error('TODO: not imp')
 
 const initHTMLString = `
-    <video id=${htmlIDs.video}></video>
-    <button id=${htmlIDs.button}></button>
+    <video class=${htmlIDs.video}></video>
+    <button class=${htmlIDs.button}></button>
   `
 
 export default class CamLib {
@@ -32,16 +33,10 @@ export default class CamLib {
   private _videoElement: HTMLVideoElement
 
   constructor(props: CamLibProps = {}) {
-    this._rootElement =
-      props.rootElement ||
-      (function () {
-        const root = document.createElement('div') as HTMLElement
-        document.body.append(root)
-        return root
-      })()
+    this._rootElement = props.rootElement || (document.createElement('div') as HTMLElement)
     this._rootElement.innerHTML = initHTMLString
-    this._videoElement = document.getElementById(htmlIDs.video) as HTMLVideoElement
-    this._buttonElement = document.getElementById(htmlIDs.button) as HTMLButtonElement
+    this._videoElement = this._rootElement.getElementsByClassName(htmlIDs.video)[0] as HTMLVideoElement
+    this._buttonElement = this._rootElement.getElementsByClassName(htmlIDs.button)[0] as HTMLButtonElement
     if (!this._buttonElement || !this._videoElement) {
       throw new Error(
         `[ERROR] SHIT WE FUCKED UP!!! 
