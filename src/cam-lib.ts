@@ -6,6 +6,7 @@ interface Dimension {
 interface CamLibProps {
   rootElement?: HTMLElement
   dimension?: Dimension
+  navigator?: any
 }
 
 type Mode = 'PICTURE' | 'VIDEO'
@@ -15,7 +16,6 @@ const htmlIDs = {
   video: `cam-lib-v-X0o${Math.random()}`,
   button: `cam-lib-b-X0o${Math.random()}`,
 }
-console.log(htmlIDs)
 
 const notImp = new Error('TODO: not imp')
 
@@ -35,8 +35,12 @@ export default class CamLib {
   constructor(props: CamLibProps = {}) {
     this._rootElement = props.rootElement || (document.createElement('div') as HTMLElement)
     this._rootElement.innerHTML = initHTMLString
-    this._videoElement = this._rootElement.getElementsByClassName(htmlIDs.video)[0] as HTMLVideoElement
-    this._buttonElement = this._rootElement.getElementsByClassName(htmlIDs.button)[0] as HTMLButtonElement
+    this._videoElement = this._rootElement.getElementsByClassName(
+      htmlIDs.video
+    )[0] as HTMLVideoElement
+    this._buttonElement = this._rootElement.getElementsByClassName(
+      htmlIDs.button
+    )[0] as HTMLButtonElement
     if (!this._buttonElement || !this._videoElement) {
       throw new Error(
         `[ERROR] SHIT WE FUCKED UP!!! 
@@ -46,7 +50,7 @@ export default class CamLib {
     }
     this.dimension = props.dimension || { width: 100, height: 100 }
     this.mode = 'PICTURE'
-    // this._getMediaDevices()
+    this._getMediaDevices()
   }
   private async _permisionStatus(): Promise<boolean> {
     const res = await navigator.permissions.query({ name: 'camera' })
@@ -61,10 +65,10 @@ export default class CamLib {
       .getUserMedia({
         video: true,
       })
-      .then((s) => {
+      .then((s: MediaStream) => {
         this._videoElement.srcObject = s
       })
-      .catch((err) => {
+      .catch((err: any) => {
         throw new Error(err)
       })
   }
