@@ -1,5 +1,5 @@
 {
-  "name": "cam-lib",
+  "name": "camlibu",
   "version": "0.0.0",
   "description": "",
   "keywords": [],
@@ -21,7 +21,7 @@
   "scripts": {
     "lint": "tslint  --project tsconfig.json -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
     "prebuild": "rimraf dist",
-    "build": "tsc --module commonjs && rollup -c rollup.config.ts && typedoc --out docs --target es6 --theme minimal --mode file src",
+    "build": "tsc --module commonjs && rollup -c rollup.config.ts",
     "start": "rollup -c rollup.config.ts -w",
     "test": "jest --coverage",
     "test:watch": "jest --coverage --watch",
@@ -118,6 +118,7 @@
     "typescript": "^3.0.3"
   },
   "dependencies": {
+    "@types/lodash": "^4.14.191",
     "jsdom": "^20.0.3"
   }
 }
