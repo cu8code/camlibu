@@ -1,4 +1,4 @@
-import CamLib from '../src/cam-lib'
+import CamLib from '../src/camlibu'
 
 Object.assign(window.navigator, {
   mediaDevices: {
@@ -17,11 +17,6 @@ test('check all the methods and props present in Cam-lib', () => {
 
   const camLib = new CamLib()
 
-  expect(camLib.id).not.toBeNull()
-  expect(camLib.camSize).not.toBeNull()
-  expect(camLib.dropShadow).not.toBeNull()
-  expect(camLib.borderRadius).not.toBeNull()
-  expect(camLib.border).not.toBeNull()
   expect(camLib.forceScreenshotSourceSize).not.toBeNull()
   expect(camLib.imageSmoothing).not.toBeNull()
   expect(camLib.mirrored).not.toBeNull()
