@@ -1,7 +1,7 @@
 import { Options } from './type'
-import defaultValue from './default'
+import { defaultValue } from './default'
 
-export default class CamLibu {
+export class CamLibu {
   /* Options */
   audio: boolean // enable | disable audio
   audioMediaStream: Promise<MediaStream> | null // Object contaning the audio source

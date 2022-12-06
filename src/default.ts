@@ -1,4 +1,4 @@
-import { Dimension, ImageFormat } from './type'
+import { ImageFormat } from './type'
 import getUserMediaStream from './modules/getUserMedia'
 /* TODO => find a way to dynamicaly generate the type of defaultValue from
  * Options */
@@ -17,7 +17,7 @@ export type Options = {
   onUserMediaError: () => void
 }
 
-const defaultValue: Options = {
+export const defaultValue: Options = {
   audio: false,
   audioMediaStream: getUserMediaStream('audio'),
   forceScreenshotSourceSize: false,
@@ -31,5 +31,3 @@ const defaultValue: Options = {
   onUserMedia: () => {},
   onUserMediaError: () => {}
 } as const
-
-export default defaultValue

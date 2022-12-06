@@ -1,7 +1,3 @@
-import Camlibu from './camlibu'
-import defaultValue from './default'
-import getUserMediaStream from './modules/getUserMedia'
-
-export const CamLibu = Camlibu
-export const DefaultValue = defaultValue
-export const GetUserMediaStream = getUserMediaStream
+export { defaultValue } from './default'
+export { CamLibu } from './camlibu'
+export { getUserMediaStream } from './modules/getUserMedia'
