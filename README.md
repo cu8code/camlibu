@@ -1,4 +1,4 @@
-# Camlib
+# Camlibu
 
 This a lib for ezy intigration of camAPI in your web page
 
