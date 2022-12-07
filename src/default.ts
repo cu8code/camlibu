@@ -1,5 +1,5 @@
 import { ImageFormat } from './type'
-import getUserMediaStream from './modules/getUserMedia'
+import { getUserMediaStream } from './modules/getUserMedia'
 /* TODO => find a way to dynamicaly generate the type of defaultValue from
  * Options */
 export type Options = {

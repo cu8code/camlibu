@@ -18,7 +18,7 @@ export class CamLibu {
 
   /* Methods */
   getVideo!: () => void
-  getPicture!: () => string
+  getPicture!: () => string | void
 
   constructor(options: Options = {}) {
     this.audio = options.audio || defaultValue.audio
