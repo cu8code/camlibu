@@ -29,7 +29,6 @@ export async function getPicture(this: CamLibu, e: any, type: any): Promise<any>
 
       x.drawImage(v, 0, 0)
       return c.toDataURL()
-      break
     }
     case 'returnAsFile': {
       break
