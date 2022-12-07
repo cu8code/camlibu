@@ -1,8 +1,10 @@
 import { Options } from './type'
 import { defaultValue } from './default'
+import { getPicture } from './modules/getPicture'
 
 export class CamLibu {
   /* Options */
+  // videoElement : HTMLVideoElement // this will be usefull for taking picture
   audio: boolean // enable | disable audio
   audioMediaStream: Promise<MediaStream> | null // Object contaning the audio source
   forceScreenshotSourceSize: boolean // uses size of underlying source video stream (and thus ignores other size related props)
@@ -18,7 +20,7 @@ export class CamLibu {
 
   /* Methods */
   getVideo!: () => void
-  getPicture!: () => string | void
+  getPicture = getPicture
 
   constructor(options: Options = {}) {
     this.audio = options.audio || defaultValue.audio

@@ -1,4 +1,4 @@
-import CamLib from '../src/camlibu'
+import { CamLibu } from '../src/main'
 
 Object.assign(window.navigator, {
   mediaDevices: {
@@ -11,11 +11,10 @@ Object.assign(window.navigator, {
 })
 
 test('check all the methods and props present in Cam-lib', () => {
-  spyOn(CamLib.prototype, 'onUserMedia')
-  spyOn(CamLib.prototype, 'onUserMediaError')
-  spyOn(CamLib.prototype, 'getScreenshot')
+  spyOn(CamLibu.prototype, 'onUserMedia')
+  spyOn(CamLibu.prototype, 'onUserMediaError')
 
-  const camLib = new CamLib()
+  const camLib = new CamLibu()
 
   expect(camLib.forceScreenshotSourceSize).not.toBeNull()
   expect(camLib.imageSmoothing).not.toBeNull()
@@ -24,5 +23,4 @@ test('check all the methods and props present in Cam-lib', () => {
   expect(camLib.minScreenshotHeight).not.toBeNull()
   expect(camLib.screenshotFormat).not.toBeNull()
   expect(camLib.screenshotQuality).not.toBeNull()
-  expect(camLib.videoConstraints).not.toBeNull()
 })

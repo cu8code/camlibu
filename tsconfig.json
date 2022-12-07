@@ -14,7 +14,10 @@
     "outDir": "dist/lib",
     "typeRoots": ["node_modules/@types"],
     "noUnusedLocals": false,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "noImplicitAny": false, 
+    "skipLibCheck": true,
+    "allowUmdGlobalAccess": true,
   },
   "typedocOptions": {
     "entryPoints": ["src/index.ts"],
