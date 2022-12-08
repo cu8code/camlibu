@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "description": "",
   "keywords": [],
-  "main": "dist/cam-lib.umd.js",
-  "module": "dist/cam-lib.es5.js",
-  "typings": "dist/types/cam-lib.d.ts",
+  "main": "dist/camlibu.umd.js",
+  "module": "dist/camlibu.es5.js",
+  "typings": "dist/types/index.d.ts",
   "files": [
     "dist"
   ],

@@ -15,9 +15,9 @@
     "typeRoots": ["node_modules/@types"],
     "noUnusedLocals": false,
     "strictNullChecks": true,
-    "noImplicitAny": false, 
-    "skipLibCheck": true,
-    "allowUmdGlobalAccess": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictFunctionTypes": true,
   },
   "typedocOptions": {
     "entryPoints": ["src/main.ts"],

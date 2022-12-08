@@ -10,7 +10,7 @@ Object.assign(window.navigator, {
   }
 })
 
-test('check all the methods and props present in Cam-lib', () => {
+test('check all the methods and props present in camlibu', () => {
   spyOn(CamLibu.prototype, 'onUserMedia')
   spyOn(CamLibu.prototype, 'onUserMediaError')
 

@@ -22,7 +22,7 @@ export async function getPicture(this: CamLibu, e: any, type: any): Promise<any>
       const v = document.createElement('video')
 
       if (x === null) {
-        throw new Error('Device not compatable')
+        throw new Error('Device not compatible')
       }
       const stream = await this.videoMediaStream
       v.srcObject = stream
